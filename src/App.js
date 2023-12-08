@@ -1,24 +1,38 @@
-import logo from './logo.svg';
 import './App.css';
-
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import Navbar from './components/Navbar';
+import { ThemeProvider } from '@emotion/react';
+import { Suspense } from 'react';
+import { createTheme } from '@mui/material';
+export const theme = createTheme({
+  // palette: {
+  //   primary: {
+  //     main: '#1173FF',
+  //   },
+  //   secondary: {
+  //     main: '#117300', 
+  //   },
+  // },
+  typography: {
+    fontFamily: [
+      'Lato',
+      'sans-serif',
+    ].join(','),
+  },
+});
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <BrowserRouter>
+      <Suspense>
+        <Navbar />
+        <Routes>
+          <Route path='/' element={<Home />} />
+        </Routes>
+      </Suspense>
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
 
